@@ -16,10 +16,11 @@ import {
     @Post()
     createNote(
       @Body('P_note') note: string,
+      @Body('P_user') user: number
    
     ): Promise<NotesEntity> {
       this.logger.verbose({ note});
-      return this.notesService.createNote(note);
+      return this.notesService.createNote(note,user);
     }
   }
   

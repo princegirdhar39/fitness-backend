@@ -4,7 +4,9 @@ import {
   PrimaryGeneratedColumn,
   Column,
   ManyToOne,
+  OneToMany,
 } from 'typeorm';
+import { NotesEntity } from 'src/notes/notes.entity';
 
 @Entity('users')
 export class UsersEntity extends BaseEntity {
@@ -19,4 +21,8 @@ export class UsersEntity extends BaseEntity {
 
   @Column()
   email: string;
+
+  @OneToMany(type => NotesEntity, note => note.user_id)
+  notes: NotesEntity[];
+  
 }

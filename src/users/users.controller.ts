@@ -15,6 +15,7 @@ import {
 } from '@nestjs/common';
 import { UsersService } from './users.service';
 import { UsersEntity } from './users.entity';
+import { get } from 'http';
 
 @Controller('users')
 export class UsersController {
@@ -31,4 +32,11 @@ export class UsersController {
     this.logger.verbose({ fname, lname, email });
     return this.usersService.createUser(fname, lname, email);
   }
+
+  @Get()
+  getUsers(): Promise<UsersEntity[]> {
+    this.logger.verbose('geting allusers') 
+    return this.usersService.getUsers();
+  }
+  
 }

@@ -22,4 +22,9 @@ export class UsersService {
     });
     return newUser.save();
   }
+  async getUsers(): Promise<UsersEntity[]> {
+    return this.usersRepository.find({
+      relations: ['notes'],
+    });
+  }
 }

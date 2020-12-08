@@ -12,13 +12,12 @@ export class NotesService {
 
   async createNote(
     note: string,
-    // lname: string,
-    // emailid: string,
+    user: number
+   
   ): Promise<NotesEntity> {
     const newnote = await this.notesRepository.create({
       note: note,
-    //   last_name: lname,
-    //   email: emailid,
+      user_id: user
     });
     return newnote.save();
   }
