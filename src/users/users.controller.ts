@@ -38,5 +38,14 @@ export class UsersController {
     this.logger.verbose('geting allusers') 
     return this.usersService.getUsers();
   }
+
+  @Post('/assign-condition')
+  assignConditionToUser(
+    @Body('userId') userId: number,
+    @Body('conditionId') conditionId: number,
+  ) {
+    console.log(`Assign condition to user. User ID: ${userId}  Condition ID: ${conditionId}`);
+    return this.usersService.assignAConditionToAUser(userId, conditionId);
+  }
   
 }

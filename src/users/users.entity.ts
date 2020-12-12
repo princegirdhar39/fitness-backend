@@ -5,8 +5,11 @@ import {
   Column,
   ManyToOne,
   OneToMany,
+  ManyToMany,
+  JoinTable,
 } from 'typeorm';
 import { NotesEntity } from 'src/notes/notes.entity';
+import { ConditionsEntity } from 'src/conditions/conditions.entity';
 
 @Entity('users')
 export class UsersEntity extends BaseEntity {
@@ -24,5 +27,18 @@ export class UsersEntity extends BaseEntity {
 
   @OneToMany(type => NotesEntity, note => note.user_id)
   notes: NotesEntity[];
+  
+  @ManyToMany(type => ConditionsEntity, {cascade: true})
+  @JoinTable({
+    name: 'users-conditions',
+    joinColumn: {
+      name: 'user', referencedColumnName: 'id'
+    },
+    inverseJoinColumn: {
+      name: 'condition',
+      referencedColumnName: 'id'
+    }
+  })
+  conditions: ConditionsEntity[]
   
 }

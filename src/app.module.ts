@@ -4,6 +4,7 @@ import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { UsersModule } from './users/users.module';
 import { NotesModule } from './notes/notes.module';
+import { ConditionsModule } from './conditions/conditions.module';
 
 @Module({
   imports: [
@@ -19,6 +20,7 @@ import { NotesModule } from './notes/notes.module';
     }),
     UsersModule,
     NotesModule,
+    ConditionsModule,
   ],
   controllers: [AppController],
   providers: [AppService],
