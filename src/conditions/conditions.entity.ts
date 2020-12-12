@@ -20,7 +20,7 @@ export class ConditionsEntity extends BaseEntity {
 
   @ManyToMany((type) => UsersEntity, { cascade: true })
   @JoinTable({
-    name: 'users-conditions',
+    name: 'users_conditions',
     joinColumn: {
       name: 'condition',
       referencedColumnName: 'id',
