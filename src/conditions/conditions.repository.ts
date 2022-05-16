@@ -4,5 +4,5 @@ import { ConditionsEntity} from './conditions.entity';
 
 @EntityRepository(ConditionsEntity)
 export class ConditionsRepository extends Repository<ConditionsEntity> {
-  private logger = new Logger('NotesRepository');
+  private logger = new Logger('ConditionsRepository');
 }

@@ -3,6 +3,7 @@ import {
     Post,
     Body,
     Logger,
+    Get,
   } from '@nestjs/common';
   import { ConditionsService } from './conditions.service';
   import { ConditionsEntity } from './conditions.entity';
@@ -12,6 +13,12 @@ import {
     private logger = new Logger('ConditionsController');
   
     constructor(private conditionsService: ConditionsService) {}
+
+    @Get()
+  getConditions(): Promise<ConditionsEntity[]> {
+    this.logger.verbose('getting conditions');
+    return this.conditionsService.getConditions();
+  }
   
     @Post()
     createConditions(

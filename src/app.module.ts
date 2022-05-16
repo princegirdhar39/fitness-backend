@@ -13,7 +13,7 @@ import { ConditionsModule } from './conditions/conditions.module';
       host: 'localhost',
       port: 5432,
       username: 'postgres',
-      password: '1111',
+      password: 'M!ndstrength123',
       database: 'fitness',
       entities: [__dirname + '/**/*.entity.{js,ts}'],
       synchronize: true,

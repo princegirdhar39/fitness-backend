@@ -10,6 +10,7 @@ import {
 } from 'typeorm';
 import { NotesEntity } from 'src/notes/notes.entity';
 import { ConditionsEntity } from 'src/conditions/conditions.entity';
+import { PrescriptionsEntity } from 'src/prescriptions/prescription.entity';
 
 @Entity('users')
 export class UsersEntity extends BaseEntity {
@@ -40,5 +41,18 @@ export class UsersEntity extends BaseEntity {
     }
   })
   conditions: ConditionsEntity[]
+
+  @ManyToMany(type => PrescriptionsEntity, {cascade: true})
+  @JoinTable({
+    name: 'users_prescriptions',
+    joinColumn: {
+      name: 'user', referencedColumnName: 'id'
+    },
+    inverseJoinColumn: {
+      name: 'prescription',
+      referencedColumnName: 'id'
+    }
+  })
+  prescription: PrescriptionsEntity[]
   
 }

@@ -12,6 +12,7 @@ import {
   ParseIntPipe,
   UseGuards,
   Logger,
+  Put,
 } from '@nestjs/common';
 import { UsersService } from './users.service';
 import { UsersEntity } from './users.entity';
@@ -46,6 +47,23 @@ export class UsersController {
   ) {
     console.log(`Assign condition to user. User ID: ${userId}  Condition ID: ${conditionId}`);
     return this.usersService.assignAConditionToAUser(userId, conditionId);
+  }
+  @Post('/assign-prescription')
+  assignPrescriptionToUser(
+    @Body('userId') userId: number,
+    @Body('prescriptionId') prescriptionId: number,
+  ) {
+    console.log(`Assign prescription to user. User ID: ${userId}  Condition ID: ${prescriptionId }`);
+    return this.usersService.assignAPrescriptionToAUser(userId, prescriptionId);
+  }
+  @Put('/update-user-note')
+  updateUserNote(
+    @Body('userId') userId: number,
+    @Body('note') note: string
+  ) {
+    console.log(`Assign note to user: ${userId} note: ${note}`);
+    return this.usersService.updateUserNote(userId,note)
+
   }
   
 }
