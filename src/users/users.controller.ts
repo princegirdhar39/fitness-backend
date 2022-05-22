@@ -48,6 +48,30 @@ export class UsersController {
     console.log(`Assign condition to user. User ID: ${userId}  Condition ID: ${conditionId}`);
     return this.usersService.assignAConditionToAUser(userId, conditionId);
   }
+  @Delete('/remove-condition')
+  unassignConditionFromUser(
+    @Body('userId') userId: number,
+    @Body('conditionId') conditionId: number,
+) {
+  console.log(`Unassign condition to user. User ID: ${userId}  Condition ID: ${conditionId}`);
+  return this.usersService.unassignConditionFromUser(userId, conditionId);
+  
+
+
+
+  }
+  @Delete('/remove-prescription')
+  unassignPrescriptionFromUser(
+    @Body('userId') userId: number,
+    @Body('prescriptionId') prescriptionId: number,
+) {
+  console.log(`Unassign condition to user. User ID: ${userId}  Condition ID: ${prescriptionId}`);
+  return this.usersService.unassignPrescriptionFromUser(userId, prescriptionId);
+  
+
+
+
+  }
   @Post('/assign-prescription')
   assignPrescriptionToUser(
     @Body('userId') userId: number,

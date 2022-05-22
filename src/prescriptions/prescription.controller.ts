@@ -8,6 +8,7 @@ export class PrescriptionsController {
 
   constructor(private prescriptionService: PrescriptionsService) {}
 
+
   @Get()
   getPrescriptions(): Promise<PrescriptionsEntity[]> {
     this.logger.verbose('getting prescriptions');

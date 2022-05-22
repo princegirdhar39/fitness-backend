@@ -25,6 +25,8 @@ export class UsersEntity extends BaseEntity {
 
   @Column()
   email: string;
+  
+  note: string;
 
   @OneToMany(type => NotesEntity, note => note.user_id)
   notes: NotesEntity[];

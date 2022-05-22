@@ -29,4 +29,7 @@ export class PrescriptionsService {
   async getPrescriptionById(id: number) {
     return this.prescriptionsRepository.findOne(id);
   }
+ async createPrescription() {
+   
+ }
 }
