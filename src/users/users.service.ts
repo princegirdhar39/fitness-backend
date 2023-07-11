@@ -40,45 +40,57 @@ export class UsersService {
     for (let user of users) {
       const note = await this.notesRepository.findOne({ user_id: user.id });
       user.note = note?.note;
+      // user.conditions
+      // user.prescription
     }
     return users;
+  }
+
+  async getUserById(id): Promise<UsersEntity>{
+    return this.usersRepository.findOne({
+      where: {
+        id,
+      },
+    });
+
   }
   async unassignPrescriptionFromUser(user_id: number, prescription_id: number){
     const user = await this.usersRepository.findOne(user_id, {
       relations: ['prescription'],
     });
     console.log('Found user: ', user);
-    const prescription = await this.prescriptionsService.getPrescriptionById(
-      prescription_id,
-    );
-    console.log('Prescription: ', prescription);
-    console.log('Prescription: ', prescription);
+    if (!user) {
+      throw new Error(`User with ID ${user_id} not found`);
+    }
     user.prescription.pop();
     await user.save();
     return user;
 
 
   }
-  async unassignConditionFromUser(user_id: number, condition_id: number) {
-    console.log('Service: ', user_id, condition_id);
-    const user = await this.usersRepository.findOne(user_id, {
+  async  unassignConditionFromUser(userId: number, conditionId: number) {
+    const user = await this.usersRepository.findOne(userId, {
       relations: ['conditions'],
     });
-    console.log('Found user: ', user);
-    const condition = await this.conditionsService.getConditonById(
-      condition_id,
+  
+    if (!user) {
+      throw new Error(`User with ID ${userId} not found`);
+    }
+    if(user) {
+      console.log(userId)
+    }
+  
+    const conditionIndex = user.conditions.findIndex(
+      (condition) => condition.id === conditionId
     );
-    console.log('Condition: ', condition);
-    console.log('user.condition',user.conditions)
-    //  const unassignList = user.conditions.filter((cond) => {
-    //    cond.id !== condition.id
-    //    console.log(cond.id !== condition.id )
-
-    // });
-
-    user.conditions.pop()
-
-    await user.save();
+  
+    if (conditionIndex === -1) {
+      throw new Error(`Condition with ID ${conditionId} not found for the user${userId}`);
+    }
+  
+    user.conditions.splice(conditionIndex, 1);
+    await this.usersRepository.save(user);
+  
     return user;
   }
 

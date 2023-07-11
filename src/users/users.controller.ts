@@ -39,6 +39,12 @@ export class UsersController {
     this.logger.verbose('geting allusers') 
     return this.usersService.getUsers();
   }
+  @Get()
+  getUserById(
+    @Body('user_id') userId: number
+  ) {
+    return this.usersService.getUserById(userId);
+  }
 
   @Post('/assign-condition')
   assignConditionToUser(
@@ -53,12 +59,8 @@ export class UsersController {
     @Body('userId') userId: number,
     @Body('conditionId') conditionId: number,
 ) {
-  console.log(`Unassign condition to user. User ID: ${userId}  Condition ID: ${conditionId}`);
+  console.log(userId,conditionId);
   return this.usersService.unassignConditionFromUser(userId, conditionId);
-  
-
-
-
   }
   @Delete('/remove-prescription')
   unassignPrescriptionFromUser(
