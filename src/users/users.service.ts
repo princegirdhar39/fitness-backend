@@ -40,6 +40,8 @@ export class UsersService {
     for (let user of users) {
       const note = await this.notesRepository.findOne({ user_id: user.id });
       user.note = note?.note;
+      // user.conditions
+      // user.prescription
     }
     return users;
   }
