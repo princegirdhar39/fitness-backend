@@ -1,0 +1,2 @@
+Access Tokens - Expires in couple of mins.
+Refresh tokens - expires in one week

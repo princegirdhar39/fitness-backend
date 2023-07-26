@@ -5,6 +5,9 @@ import { AppService } from './app.service';
 import { UsersModule } from './users/users.module';
 import { NotesModule } from './notes/notes.module';
 import { ConditionsModule } from './conditions/conditions.module';
+import { DoctorsModule } from './doctors/doctors.module';
+import { AuthModule } from './auth/auth.module';
+import { PassportModule } from '@nestjs/passport';
 
 @Module({
   imports: [
@@ -21,6 +24,8 @@ import { ConditionsModule } from './conditions/conditions.module';
     UsersModule,
     NotesModule,
     ConditionsModule,
+    DoctorsModule,
+    AuthModule,
   ],
   controllers: [AppController],
   providers: [AppService],

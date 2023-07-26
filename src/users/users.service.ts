@@ -62,9 +62,14 @@ export class UsersService {
     if (!user) {
       throw new Error(`User with ID ${user_id} not found`);
     }
-    user.prescription.pop();
-    await user.save();
-    return user;
+    let indexToRemove = user.prescription.findIndex((pres) => pres.id === prescription_id );
+    if (indexToRemove === -1) {
+      throw new Error(`Condition with ID ${prescription_id} not found for the user${user_id}`);
+    }
+    
+      user.prescription.splice(indexToRemove,1);
+      await this.usersRepository.save(user);
+      return user;
 
 
   }
@@ -97,7 +102,7 @@ export class UsersService {
   async assignAConditionToAUser(user_id: number, condition_id: number) {
     console.log('Service: ', user_id, condition_id);
     const user = await this.usersRepository.findOne(user_id, {
-      relations: ['conditions'],
+      relations: ['conditions'], //it retrives the conditions associated with user
     });
     console.log('Found user: ', user);
     const condition = await this.conditionsService.getConditonById(
