@@ -14,7 +14,9 @@ export class JwtStratergy extends PassportStrategy(Strategy){
         });
     }
     async validate(payload: any ): Promise<any> {
-        return payload; //decoded jwt
+    const doctor = await this.doctorService.getDocByUsername(payload.username);
+
+        return doctor; //decoded jwt
     }
 
 }

@@ -7,18 +7,19 @@ import { LocalStratergy } from './local.strategy';
 import { JwtModule } from '@nestjs/jwt';
 import { JwtStratergy } from './jwt.stratergy';
 import { DoctorsService } from 'src/doctors/doctors.service';
+import { SessionSerializer } from './session.serializer';
 
 @Module({
   imports: [PassportModule,forwardRef(() => DoctorsModule),JwtModule.register ({
     secret:'secretKey',
     signOptions: {
-      expiresIn: "60s"
+      expiresIn: "1h"
     }
   }),
   
 ],
   controllers: [AuthController],
-  providers: [AuthService,LocalStratergy,JwtStratergy],
+  providers: [AuthService,LocalStratergy,JwtStratergy,SessionSerializer],
   exports: [AuthService]
 })
 export class AuthModule {}

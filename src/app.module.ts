@@ -8,6 +8,7 @@ import { ConditionsModule } from './conditions/conditions.module';
 import { DoctorsModule } from './doctors/doctors.module';
 import { AuthModule } from './auth/auth.module';
 import { PassportModule } from '@nestjs/passport';
+import { AppointmentsModule } from './appointments/appointments.module';
 
 @Module({
   imports: [
@@ -26,6 +27,7 @@ import { PassportModule } from '@nestjs/passport';
     ConditionsModule,
     DoctorsModule,
     AuthModule,
+    AppointmentsModule,
   ],
   controllers: [AppController],
   providers: [AppService],

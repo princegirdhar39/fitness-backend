@@ -18,6 +18,7 @@ import { UsersService } from './users.service';
 import { UsersEntity } from './users.entity';
 import { get } from 'http';
 import { AuthenticatedGuard } from 'src/auth/authenticated.guard';
+import { JwtAuthGuard } from 'src/auth/jwt-auth.guard';
 
 @Controller('users')
 export class UsersController {
@@ -34,7 +35,7 @@ export class UsersController {
     this.logger.verbose({ fname, lname, email });
     return this.usersService.createUser(fname, lname, email);
   }
-  @UseGuards(AuthenticatedGuard)
+  @UseGuards(JwtAuthGuard)
   @Get()
   getUsers(): Promise<UsersEntity[]> {
     this.logger.verbose('geting allusers') 

@@ -2,6 +2,7 @@ import { Injectable } from '@nestjs/common';
 import { JwtService } from '@nestjs/jwt';
 import { DoctorsService } from 'src/doctors/doctors.service';
 import { Doctor } from 'src/doctors/entities/doctor.entity';
+import { comparePasswords } from 'src/utils/bcrypt';
 import { CreateAuthDto } from './dto/create-auth.dto';
 import { UpdateAuthDto } from './dto/update-auth.dto';
 
@@ -18,24 +19,20 @@ export class AuthService {
 
   }
   async login(username: string, password: string): Promise<string>{
-    console.log(username)
 
     const doctor = await this.doctorService.getDocByUsername(username);
-    console.log('**************',doctor);
+    const token = this.generateToken(doctor);
 
     if (!doctor) {
-      throw new Error('Invalid Credentials');
+      throw new Error('Invalid Credentialshi');
     }
+    const matched = comparePasswords(password,doctor.password);
 
-    if (!doctor.password) {
+    if (!matched) {
       throw new Error(
-        'Account not activated. Please check your email or contact your admin.',
+        'Invalid Credentials--',
       );
     }
-   
-
-    
-   const token = this.generateToken(doctor);
     return token;
   }
   create(createAuthDto: CreateAuthDto) {

@@ -11,6 +11,7 @@ import {
 import { NotesEntity } from 'src/notes/notes.entity';
 import { ConditionsEntity } from 'src/conditions/conditions.entity';
 import { PrescriptionsEntity } from 'src/prescriptions/prescription.entity';
+import { Appointment } from 'src/appointments/entities/appointment.entity';
 
 @Entity('users')
 export class UsersEntity extends BaseEntity {
@@ -30,7 +31,9 @@ export class UsersEntity extends BaseEntity {
 
   @OneToMany(type => NotesEntity, note => note.user_id)
   notes: NotesEntity[];
-  
+
+  @OneToMany(type => Appointment, appointment => appointment.user_id)
+  appointments: Appointment[];
   @ManyToMany(type => ConditionsEntity, {cascade: true})
   @JoinTable({
     name: 'users_conditions',
@@ -56,5 +59,5 @@ export class UsersEntity extends BaseEntity {
     }
   })
   prescription: PrescriptionsEntity[]
-  
+
 }

@@ -134,7 +134,6 @@ export class UsersService {
 
     let Usernote = await this.notesRepository.findOne({ user_id });
     if (Usernote) {
-      // Usernote.note = note;
       await this.notesRepository.update({ user_id }, { note });
     } else {
       await this.notesRepository.save({

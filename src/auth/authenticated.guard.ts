@@ -6,7 +6,14 @@ import { Observable } from "rxjs";
 export class AuthenticatedGuard implements CanActivate{
     async canActivate(context: ExecutionContext) {
         const request = context.switchToHttp().getRequest();
-        return request.isAuthenticated();
+        // return request.isAuthenticated();
+        const user = request.user;
+
+        if (user === undefined) {
+            return false;
+        } else {
+            return true;
+        }
         
     }
 
